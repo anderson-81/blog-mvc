@@ -1,0 +1,61 @@
+﻿@model PagedList.IPagedList<blog_mvc.Models.Post>
+@using PagedList.Mvc
+
+<header class="masthead" style="background-image: url('/img/home-bg.jpg');">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                <div class="site-heading">
+                    <h1>Clean Blog</h1>
+                    <span class="subheading">A Blog Theme by Start Bootstrap</span>
+                    @using (Html.BeginForm("Index", "Post", FormMethod.Post))
+                    {
+                        <div class="input-group margin-top-5">
+                            <input type="text" name="search" id="search" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default btn-search" id="btnSearch">Search</button>
+                            </span>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="post-preview">
+                        <a href="@Url.Action("Details", "Post", new { id = item.Id})">
+                            <h2 class="post-title">
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </h2>
+                            <h3 class="post-subtitle">
+                                @Html.DisplayFor(modelItem => item.Briefing)
+                            </h3>
+                        </a>
+                        <p class="post-meta">
+                            Posted by @Html.DisplayFor(modelItem => item.AspNetUsers.UserName) on @Html.DisplayFor(modelItem => item.DateCreate) @if (item.DateChange != null)
+                            { @String.Concat("and updated on ", @Html.DisplayFor(modelItem => item.DateChange))}
+                        </p>
+                    </div>
+                    <hr>
+                }
+                <!-- Pager -->
+                <div class="clearfix">
+                    <div class="pull-right">
+                        Page @Model.PageNumber of @Model.PageCount
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { _page = page }))
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<hr>
+@Html.Partial("_Footer")

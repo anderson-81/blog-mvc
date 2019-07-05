@@ -1,0 +1,47 @@
+﻿@model blog_mvc.Models.LoginViewModel
+
+<div class="container margin-top-10">
+    <div class="col-md-12">
+        <h1>Login</h1>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="offset-md-4 col-md-4 offset-md-4">
+            <section id="loginForm">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        @if (ViewData.ModelState.Any(x => x.Value.Errors.Any()))
+                        {
+                            <div class="alert alert-danger">
+                                <a href="#" class="close" data-dismiss="alert">×</a>
+                                <h4>Validation Errors:</h4>
+                                @Html.ValidationSummary(false)
+                            </div>
+                        }
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UserName, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @Value = "MaryGuest", @readonly = "true" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Value = "guest123", @readonly = "true" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Login" class="btn btn-success pull-right" />
+                        @Html.ActionLink("Cancel", "Index", "Post", new { @class = "btn btn-secondary pull-right" })
+                    </div>
+                }
+            </section>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_Footer")

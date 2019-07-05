@@ -1,0 +1,10 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    <li class="nav-item"><a href="#" id="lnklogoff" data-toggle="modal" data-target="#logoffModal" class="nav-link color-white-link">Logoff</a></li>
+}
+else
+{
+    <li class="nav-item"><a href="/Account/Login" class="nav-link color-white-link">Login</a></li>
+}
+

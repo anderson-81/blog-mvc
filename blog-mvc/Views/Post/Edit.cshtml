@@ -1,0 +1,95 @@
+﻿@model blog_mvc.Models.Post
+
+<div class="container margin-top-12">
+    <div class="col-md-12">
+
+        @using (Html.BeginForm("Edit", "Post", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <h2>Edit</h2>
+            </div>
+
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                @if (ViewData.ModelState.Any(x => x.Value.Errors.Any()))
+                {
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert">×</a>
+                        <h4>Validation Errors:</h4>
+                        @Html.ValidationSummary(false)
+                    </div>
+                }
+            </div>
+
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.DateCreate)
+            @Html.HiddenFor(model => model.Picture)
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @maxlength = "50" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Briefing, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.Briefing, new { @class = "form-control", @maxlength = "50" })
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Text</label>
+                @Html.TextAreaFor(model => model.Textpost, new { @class = "form-control", @cols = 50, @rows = 15, @maxlength = "4000" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Picture, new { @class = "control-label" })
+                <a href='@ViewData["postImg"]' class="pull-right current-image-class">Current Picture</a>
+                <input type="file" name="picture" id="picture" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="btn btn-warning col-md-2 pull-right" data-toggle="modal" data-target="#modalEdit">Edit</button>
+                <button type="button" class="btn btn-danger col-md-2 pull-right" data-toggle="modal" data-target="#modalDelete">Delete</button>
+                @Html.ActionLink("Cancel", "Index", "Post", new { @class = "pull-right btn-secondary btn btn-second col-md-2" })
+            </div>
+
+
+            <div id="modalDelete" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Question</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Do you want delete this post?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+                            @Html.ActionLink("Yes", "Edit", "Post", new { id = Model.Id, opc = 2 }, new { @class = "btn btn-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalEdit" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Question</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Do you want delete this post?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+                            <input type="submit" value="Ok" class="btn btn-warning" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

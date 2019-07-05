@@ -1,0 +1,65 @@
+﻿.navbar-toggler {
+    z-index: 1;
+}
+
+@media (max-width: 576px) {
+    nav > .container {
+        width: 100%;
+    }
+}
+
+.margin-15 {
+    margin-top: 15%;
+}
+
+input[type=text], input[type=file], input[type=password], textarea {
+    border: 2px solid black !important;
+}
+
+textarea {
+    resize: none;
+}
+
+.btn-danger, .btn-warning, .btn-success {
+    cursor: pointer;
+}
+
+body {
+    background-color: #bababa;
+}
+
+.margin-top-12 {
+    margin-top: 12%;
+}
+
+.margin-top-5 {
+    margin-top: 5%;
+}
+
+.margin-top-10 {
+    margin-top: 10%;
+}
+
+.margin-top-5 {
+    margin-top: 5%;
+}
+
+.current-image-class {
+    color: red;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.btn-search {
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.color-white-link {
+    color: white !important;
+}
+
+.btn-modal-confirm {
+    cursor: pointer;
+    color: black;
+}

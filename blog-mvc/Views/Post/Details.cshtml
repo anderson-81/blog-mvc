@@ -1,0 +1,40 @@
+﻿@model blog_mvc.Models.Post
+
+<header class="masthead" style="background-image: url('@ViewData["postImg"]')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                <div class="post-heading">
+                    <h1>@Html.DisplayFor(model => model.Title)</h1>
+                    <h2 class="subheading">@Html.DisplayFor(model => model.Briefing)</h2>
+                    <span class="meta">
+                        Posted by @Html.DisplayFor(model => model.AspNetUsers.UserName) on @Html.DisplayFor(model => model.DateCreate) @if (@Html.DisplayFor(model => model.DateCreate) != null)
+                        { @String.Concat("and updated on ", @Html.DisplayFor(model => model.DateChange))}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                @Html.DisplayFor(model => model.Textpost)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink("Edit", "Edit", "Post", new { id = Model.Id, opc = 1 }, new { @class = "btn btn-warning pull-right", @style = "text-decoration:none;" })
+                }
+                @Html.ActionLink("Back", "Index", "Post", new { @class = "btn btn-secondary pull-right" })
+            </div>
+        </div>
+    </div>
+</article>
+<hr>
+
+@Html.Partial("_Footer")

@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    @Styles.Render("~/Content")
+    @Styles.Render("~/Content/tether")
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet'>
+    <title>Clean Blog - Start Bootstrap Theme</title>
+</head>
+<body>
+    <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav">
+        <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu <i class="fa fa-bars"></i>
+            </button>
+            @Html.ActionLink("Clean Blog", "Index", "Post", null, new { @class = "navbar-brand color-white-link" })
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item"><a href="/Post/Create" class="nav-link color-white-link">Create</a></li>
+                    }
+
+                    @Html.Partial("_LoginPartial")
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="logoffModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Question</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you want make Logoff?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info btn-modal-confirm color-white-link" data-dismiss="modal">No</button>
+                    <button type="button" id="logoff" class="btn btn-danger btn-modal-confirm color-white-link" data-dismiss="modal">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal content-->
+    <div class="modal fade" id="modalInfo" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">@TempData["title"]</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>@TempData["message"]</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnClose" class="btn btn-danger" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal content-->
+    @RenderBody()
+
+    @Scripts.Render("~/Scripts")
+
+    <script>
+        $("#logoff").click(function () {
+            window.location.href = "/Account/LogOff";
+        });
+    </script>
+
+    <script>
+        var show = '@TempData["show"]';
+        if (show === "1") {
+            $("#modalInfo").modal("show");
+        }
+    </script>
+</body>
+</html>
