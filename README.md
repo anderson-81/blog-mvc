@@ -13,4 +13,3 @@
 - Each post is linked to a previously registered user. Only this user can edit or delete what you have posted.
 - It has Login and Password. Certain actions in the system only executed by registered users.
 
-**P.S.:** For licensing reasons, the original project database was deleted. If you want to test, modify the project with your connection string and run the inserted * .sql file separately. 

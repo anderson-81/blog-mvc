@@ -11,30 +11,18 @@ namespace blog_mvc.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Post
     {
-        [Required]
         public int Id { get; set; }
-
         public string Aspnetusers_Id { get; set; }
-        
-        [Required]
         public string Title { get; set; }
-
-        [Required]
         public string Briefing { get; set; }
-
-        [Required]
         public string Textpost { get; set; }
-
         public byte[] Picture { get; set; }
-
-        [Required]
         public System.DateTime DateCreate { get; set; }
-        
         public Nullable<System.DateTime> DateChange { get; set; }
+    
         public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }
